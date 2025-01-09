@@ -21,36 +21,45 @@ class NotesMain extends React.Component {
    this.setState({notes});
  }
  
- onAddNotesHandler({ title, body, id, createdAt, archive }) {
+ onAddNotesHandler({ title, body, id, createdAt, archived }) {
   this.setState(prevState => ({
     notes: [
       ...prevState.notes,
-      { id: `${Date.now()}`, title, body, createdAt:new Date().toLocaleString, archive },
+      { id: `${Date.now()}`, title, body, createdAt:new Date().toLocaleString(), archived:false },
     ],
   }));
 }
-onArchiveHandler(id) {
-  const notes = this.state.notes.map(note =>
-      note.id === id ? { ...note, archive: !note.archive } : note
-  );
-  this.setState({ notes }); 
-}
+onArchiveHandler = (id) => {
+  this.setState(prevState => ({
+      notes: prevState.notes.map(note =>
+          note.id === id ? { ...note, archived: true } : note
+      ),
+  }));
+};
  
- render() {
-  const activeNotes = this.state.notes.filter(note => !note.archive);
-  const archivedNotes = this.state.notes.filter(note => note.archive);
+render() {
+  const activeNotes = this.state.notes.filter(note => !note.archived);
+  const archivedNotes = this.state.notes.filter(note => note.archived);
 
-   return (
-     <div className="notes-app">
-      <h1>Notes App</h1>
-      <UserInput addNotes={this.onAddNotesHandler} />
-       <h2>Your Notes</h2>
-       <NotesList notes={activeNotes} onDelete={this.onDeleteHandler} onArchive={this.onArchiveHandler} />
-        <h2>Archived Notes</h2>
-          <NotesList notes={archivedNotes} onDelete={this.onDeleteHandler} onArchive={this.onArchiveHandler} />
-     </div>
-   );
- }
+  return (
+      <div className="notes-app">
+          <h1>Notes App</h1>
+          <UserInput addNotes={this.onAddNotesHandler} />
+          <h2>Your Notes</h2>
+          <NotesList 
+              notes={activeNotes} 
+              onDelete={this.onDeleteHandler} 
+              onArchive={this.onArchiveHandler} 
+          />
+          <h2>Archived Notes</h2>
+          <NotesList 
+              notes={archivedNotes} 
+              onDelete={this.onDeleteHandler} 
+              onArchive={this.onArchiveHandler} 
+          />
+      </div>
+  );
+}
 }
  
 export default NotesMain;

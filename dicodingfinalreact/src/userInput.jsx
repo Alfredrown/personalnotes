@@ -17,7 +17,7 @@ import React from 'react';
       onBodyChange(event) {
         this.setState({ body: event.target.value });
       }
-    
+      
       onSubmit(event) {
         event.preventDefault();
         this.props.addNotes(this.state);

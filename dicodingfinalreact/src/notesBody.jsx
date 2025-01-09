@@ -1,16 +1,15 @@
 import React from 'react';
 import DeleteButton from './deleteButton';
 import ArchiveButton from './archiveButton';
-function NotesBody({title,body,createdAt,id,onDelete,onArchive,archive}) {
+function NotesBody({ id, title, body, createdAt, onDelete, onArchive }) {
     return (
         <div className="note-item">
-        <h3 className="note-item__title">{title}</h3>
-        <p className="note-item__body">{body}</p>
-        <p className="note-item__date">{createdAt}</p>
-        <DeleteButton id={id} onDelete={onDelete} />
-        <ArchiveButton archive={archive} onArchive={() => onArchive(id)} />
+            <h3>{title}</h3>
+            <p>{body}</p>
+            <small>{createdAt}</small>
+            <DeleteButton onDelete={() => onDelete(id)} />
+            <ArchiveButton onArchive={() => onArchive(id)} />
         </div>
     );
 }
-
 export default NotesBody;
