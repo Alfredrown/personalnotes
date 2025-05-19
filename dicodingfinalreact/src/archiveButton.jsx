@@ -3,7 +3,7 @@ import React from 'react';
 function ArchiveButton({ id,archived, onArchive }) {
     return (
         <button
-            className="archive-button"
+            className="archive-button"SS
             onClick={() => onArchive(id)}
         >
             {archived ? "Unarchive" : "Archive"}
@@ -12,9 +12,3 @@ function ArchiveButton({ id,archived, onArchive }) {
 }
 
 export default ArchiveButton;
-
-// function DeleteButton({id,onDelete}) {
-//     return <button className='notes-item-delete' onClick={() => onDelete(id)}>Delete</button>
-// }
-
-// export default DeleteButton;
